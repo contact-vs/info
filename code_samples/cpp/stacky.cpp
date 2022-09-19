@@ -14,6 +14,8 @@
 //      Somewhere deep inside -
 //          stacky<SomeContextClass>::get()->accessContextInstanceMethod();
 // 
+// Do not allocate stacky objects in heap 
+//      - they are intended to be stack only
 //--------------------------------------------------------------------------
 template <class T> class stacky
 {
@@ -43,10 +45,14 @@ public:
     {
         top() = prev;
     }
-    stacky(stacky&) = delete;
-    stacky& operator=(const stacky&) = delete;
-    stacky(stacky&&) noexcept = delete;
+    stacky(stacky&)                   = delete;
+    stacky& operator=(const stacky&)  = delete;
+    stacky(stacky&&) noexcept         = delete;
     stacky const& operator=(stacky&&) = delete;
+    void* operator new     (size_t)   = delete;
+    void* operator new[]   (size_t)   = delete;
+    void  operator delete  (void*)    = delete;
+    void  operator delete[](void*)    = delete;
 private:
     static stacky*& top()
     {
