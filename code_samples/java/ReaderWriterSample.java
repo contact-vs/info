@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.function.Consumer;
 
 public class ReaderWriterSample {
 
