@@ -23,7 +23,7 @@ public class ReaderWriterSample {
     // wait/sleep alternatives throwing unchecked RuntimeInterruptedException
     //------------------------------------------------------------------------
     public static void waitFor(Object o) {
-        waitFor(o, -1L);
+        waitFor(o, -1);
     }
     public static void waitFor(Object o, long millis) {
         try {
@@ -152,7 +152,7 @@ public class ReaderWriterSample {
                 r.run();
             } catch( RuntimeException e ) {
                 if( onException == null ) {
-                    throw e;//Err.runtime(e);
+                    throw e;
                 } else {
                     onException.accept(e);
                 }
@@ -242,7 +242,7 @@ public class ReaderWriterSample {
                     System.out.println(m);
                 }
             })
-            .periodMs(10L)
+            .periodMs(10)
             .onRuntimeException((e)->{e.printStackTrace(); throw e;})
             .onInterrupted((e)->{e.printStackTrace(); throw new RuntimeInterruptedException(e);})
         );
@@ -259,13 +259,13 @@ public class ReaderWriterSample {
                 }
                 sleep(10);
             })
-            .periodMs(10L)
+            .periodMs(10)
             .onRuntimeException((e)->{e.printStackTrace(); throw e;})
             .onInterrupted((e)->{e.printStackTrace(); throw new RuntimeInterruptedException(e);})
         ;
 
-        runNamedDaemonThread("Writer N1", writer.pauseAtStartMs(1L).periodMs(15L) );
-        runNamedDaemonThread("Writer N2", writer.copy().pauseAtStartMs(20L).periodMs(33L) );
+        runNamedDaemonThread("Writer N1", writer.pauseAtStartMs(1).periodMs(15) );
+        runNamedDaemonThread("Writer N2", writer.copy().pauseAtStartMs(20).periodMs(33) );
         Runnable reader =
             foreverRunnable(()->{
                 long l,r;
@@ -279,14 +279,14 @@ public class ReaderWriterSample {
                 }
                 sleep(5);
             })
-            .periodMs(1L)
-            .pauseAtStartMs(5L)
+            .periodMs(1)
+            .pauseAtStartMs(5)
             .onRuntimeException((e)->{e.printStackTrace(); throw e;})
             .onInterrupted((e)->{e.printStackTrace(); throw new RuntimeInterruptedException(e);})
         ;
         for( int i=0; i<9; ++i ) {
             runNamedDaemonThread("Reader N"+i,reader);
         }
-        sleep(500L);
+        sleep(500);
     }
 }
