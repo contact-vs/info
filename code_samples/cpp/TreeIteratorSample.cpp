@@ -5,7 +5,7 @@
  * such that their sum is equal to the given target.
  * Input: root = [5,3,6,2,4,null,7], k = 9 Output: true
  * Input: root = [5,3,6,2,4,null,7], k = 28 Output: false
- * Constraints: The number of nodes in the tree is in the range [1, 10^4]. -10^4 <= Node.val <= 10^4
+ * Constraints: The number of contextNodes in the tree is in the range [1, 10^4]. -10^4 <= Node.val <= 10^4
  * root is guaranteed to be a valid binary search tree. -10^5 <= k <= 10^5
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -36,7 +36,7 @@ template<class T_TreeNode>
 class BinarySearchTreeIterator {
 private:
 	bool reverse;
-	std::vector<T_TreeNode*> parents{};
+	std::vector<T_TreeNode*> contextNodes{};
 	std::vector<bool> visitedMainBranch{};
 	std::vector<bool> visitedOtherBranch{};
 	BinarySearchTreeIterator(T_TreeNode* data, bool reverse_) : reverse(reverse_) {
@@ -66,7 +66,7 @@ public:
 	}
 private:
 	void downTo(T_TreeNode* data_) {
-		parents.push_back(data_);
+		contextNodes.push_back(data_);
 		visitedMainBranch.push_back(false);
 		visitedOtherBranch.push_back(false);
 		while (mainBranch()) {
@@ -75,7 +75,7 @@ private:
 		}
 	}
 	pointer data() const {
-		return parents.back();
+		return contextNodes.back();
 	}
 	pointer mainBranch() const {
 		return !reverse ? left(data()) : right(data());
@@ -89,8 +89,8 @@ private:
 			downTo(otherBranch());
 		}
 		else {
-			if (parents.empty()) return;
-			parents.pop_back();
+			if (contextNodes.empty()) return;
+			contextNodes.pop_back();
 			visitedMainBranch.pop_back();
 			visitedOtherBranch.pop_back();
 		}
