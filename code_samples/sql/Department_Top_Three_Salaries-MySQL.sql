@@ -1,6 +1,7 @@
 /*
  https://leetcode.com/problems/department-top-three-salaries/
  185. Department Top Three Salaries Hard
+ NB: The DENSE_RANK() function is not available prior to MySQL 8.0.
  
  SQL Schema
  Table: Employee
