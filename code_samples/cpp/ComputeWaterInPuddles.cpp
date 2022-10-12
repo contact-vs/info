@@ -69,7 +69,7 @@ Amount waterInPuddles(Iterator begin, Iterator end)
         {
             levels.emplace_back(h);
         }
-        else if (h == last.height)
+        else //if (h == last.height)
         {
             ++last.length;
         }
