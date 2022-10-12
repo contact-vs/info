@@ -126,13 +126,3 @@ int main()
     cout << waterInPuddles(heightsA) << endl;                       // 17
     return 0;
 }
-int main0()
-{
-    // vector<int> heightsV = { 1, 2, 5, 0, 4, 0 };
-    // cout << waterInPuddles(heightsV) << endl; // 4
-    // list<int> heightsL = { 0, 1, 3, -2, -3, 5 };
-    // cout << waterInPuddles(heightsL) << endl; // 11
-    // array<int, 15> heightsA = { 0, 1, 3, -2, -3, 5, 4, 2, 1, 0, 2, -1, -2, 0, -1 };
-    // cout << waterInPuddles(heightsA) << endl; // 17
-    return 0;
-}
